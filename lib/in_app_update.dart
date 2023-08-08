@@ -50,6 +50,12 @@ enum AppUpdateResult {
 
 class InAppUpdate {
   static const MethodChannel _channel = const MethodChannel('in_app_update');
+  static const EventChannel _listener =
+      EventChannel('in_app_update_event');
+
+  static Stream<String> flexibleUpdateStream() {
+    return _listener.receiveBroadcastStream().map((event) => event.toString());
+  }
 
   /// Has to be called before being able to start any update.
   ///
